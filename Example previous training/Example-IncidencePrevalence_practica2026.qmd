@@ -1,0 +1,291 @@
+---
+title: "IncidencePrevalence"
+author: 
+  - Berta Raventós - Real World Epidemiology research group (RWEpi)
+institute: 
+  - IDIAP Jordi Gol
+format:
+  html:
+    embed-resources: true
+editor: visual
+echo: true
+eval: true
+toc: true
+warning: false
+---
+
+## Objetivo
+
+El objetivo de esta práctica es conocer y aprender a utilizar el paquete de R IncidencePrevalence, que permite calcular de manera sencilla tasas de incidencia y prevalencia utilizando datos estandarizados en el formato OMOP.
+
+## ¿Cómo funciona?
+
+En este fichero encontraréis una serie de ejercicios, acompañados de pistas para su resolución. Podéis crear un script R en el mismo directorio donde hay este fichero, e ir resolviéndolos en el script.\
+
+## Preparación
+
+En esta práctica usaremos librerías muy similares a las que hemos usado en la práctica anterior, y añadiremos el paquete IncidencePrevalence. Para instalarlo, deberás ejecutar:
+
+```{r, eval=FALSE}
+install.packages("IncidencePrevalence")
+```
+
+```{r, eval=TRUE}
+library(DBI)
+library(duckdb)
+library(CDMConnector)
+library(dplyr)
+library(dbplyr)
+library(here)
+library(CodelistGenerator)
+library(CohortConstructor)
+library(IncidencePrevalence)
+```
+
+Para poder hacer los ejercicios, os tendréis que conectar a la base de datos sintética ("synthea-covid19-10k"). Para facilitar el desarrollo de la práctica, os detallamos el código que necesitáis ejecutar para conectaros:
+
+```{r}
+# Conexión a la base de datos
+db <- DBI::dbConnect(
+  duckdb::duckdb(), 
+  CDMConnector::eunomiaDir("synthea-covid19-10k")
+)
+
+cdm <- cdmFromCon(con = db, 
+                  cdmSchem = "main", 
+                  writeSchema = "main", cdmName = "Synthea")
+```
+
+En esta práctica generaremos una cohorte de COVID-19 basada en códigos diagnósticos. Utilizaremos los mismos códigos que habéis utilizado en prácticas anteriores:
+
+```{r}
+#Generamos nuestra cohorte utilizando CohortConstructor
+covid_table <- read.csv(here::here("covid.csv"))
+
+covid_list <- list("covid" = covid_table$concept_id)
+
+cdm$covid <- CohortConstructor::conceptCohort(
+  cdm=cdm,
+  conceptSet = covid_list,
+  name = "covid"
+)
+
+#Indicamos la duración de la cohorte (10d)
+cdm$covid <- cdm$covid %>% 
+  padCohortEnd(10)
+```
+
+Si no se indica lo contrario, para esta práctica realizaremos el cálculo de incidencias centrándonos en el primer episodio de COVID-19 y, por lo tanto, excluiremos personas que ya hayan pasado la infección.
+
+::: {.callout-important appearance="simple" collapse="true"}
+## Importante!
+
+A lo largo de la práctica usarás funciones que seguramente serán nuevas para ti. Recuerda que puedes buscar más información escribiendo un interrogante y el nombre de la función en la consola:
+
+```{r, eval=FALSE}
+?generateDenominatorCohortSet
+```
+:::
+
+## Ejercicios
+
+### Ejercicio 1
+
+##### Calcula la incidencia del COVID-19 en la población general
+
+En este ejercicio calularemos la incidencia mensual de la COVID-19 en la población general, desde el 1 de Marzo del 2020 hasta 1 de Diciembre del 2021. En este ejercicio no estratificaremos ni por edad ni sexo, pero exigiremos que los participantes tengan un año de historia previa antes de contribuir al denominador.
+
+::: {.callout-important appearance="simple" collapse="true"}
+## Importante!
+
+A lo largo de la práctica usaremos el mismo periodo de estudio y criterio de historia previa.
+:::
+
+##### a) Identifica el denominador que nos permitirá calcular la incidencia del COVID-19 para este ejercicio. ¿Cuánta gente forma parte de este denominador?
+
+::: {.callout-tip appearance="simple" collapse="true"}
+## Pista - OMOP
+
+Utiliza la función `generateDenominatorCohortSet`. Indica el periodo de estudio y los requerimientos de historia previa (en días). Tendrás que indicar esta información modificando los argumentos `cohortDateRange` y `daysPriorObservation`. También deberás indicar el nombre de tu denominador (ej. "denominador") usando el argumento `name`.
+:::
+
+::: {.callout-tip appearance="simple" collapse="true"}
+## Pista - Programación R
+
+Para saber el número de filas de la tabla del denominador que habéis creado al objeto cdm podéis usar la función tally(). Por ejemplo:
+
+```{r, eval=FALSE}
+cdm$person %>%
+  tally()
+```
+:::
+
+##### b) Calcula la incidencia mensual del COVID-19 utilizando el denominador que has identificado en el apartado anterior.
+
+::: {.callout-tip appearance="simple" collapse="true"}
+## Pista - OMOP
+
+Usa la función `estimateIncidence`. Tendrás que indicar el nombre de la tabla del denominador que has creado anteriormente y de la tabla con el outcome de interés ("covid"). También deberás indicar que quieres utilizar meses cómo intervalo de tiempo (argumento `interval`).
+
+Recuerda que, si no se indica lo contrario, en esta práctica realizaremos el cálculo de incidencias centrándonos en el primer episodio de COVID-19 y, por lo tanto, excluiremos personas que ya hayan pasado la infección. En este caso podemos quedarnos con los valores por defecto de los argumentos `outcomeWashout` (Inf, toda la observación previa) y `repeatedEvents` (FALSE, sólo se considera el primer evento).
+:::
+
+::: {.callout-tip appearance="simple" collapse="true"}
+## Pista - R
+
+Una vez hayas obtenido la tabla con las incidencias (o de cualquier otra tabla), puedes usar la función `glimpse` del paquete dplyr para visualizar los nombres de las columnas y algunos de sus valores. Por ejemplo:
+
+```{r, eval=FALSE}
+cdm$person %>% 
+  glimpse()
+```
+:::
+
+##### c) Haz un gráfico de los resultados.
+
+::: {.callout-tip appearance="simple" collapse="true"}
+## Pista - OMOP
+
+Utiliza la función `plotIncidence`. Sólo tienes que indicar entre paréntesis el objeto con tus resultados.
+:::
+
+##### d) En los apartados anteriores hemos calculado la incidencia considerando únicamente la primera infección. ¿Cuánta gente hemos excluido por haber tenido la COVID-19 en el pasado?
+
+::: {.callout-tip appearance="simple" collapse="true"}
+## Pista - OMOP
+
+Utiliza la función `tableIncidenceAttrition`. Sólo tienes que indicar entre paréntesis el objeto con tus resultados.
+:::
+
+### Ejercicio 2
+
+##### Calcula la incidencia del COVID-19 estratificada por edad y sexo.
+
+En este ejercicio calcularemos la incidencia mensual del COVID-19 estratificando por edad y sexo. Identifica el denominador que nos permitirá calcular esta incidencia, considerando que queremos estratificar por sexo (hombres y mujeres), y grupos de edad (0-17, 18-99).
+
+::: {.callout-important appearance="simple" collapse="true"}
+## Importante!
+
+En este ejercicio volverás a generar tablas en el objeto 'cdm'. Recuerda nombrarlos de manera diferente para no sobrescribir las tablas que has generado en el ejercicio anterior (eg. "denominator_strata", "inc_strata").
+:::
+
+##### a) Identifica el nuevo denominador considerando los grupos de edad y sexo.
+
+::: {.callout-tip appearance="simple" collapse="true"}
+## Pista - OMOP
+
+Sigue los mismos pasos que en los ejercicios anteriores, pero en este caso, añade las estratificaciones de interés con los argumentos `sex` y `ageGroup`.
+:::
+
+##### b) Calcula la incidencia mensual del COVID-19 utilizando este nuevo denominador.
+
+##### c) Vuelve a calcular la incidencia del COVID-19 tal y cómo has hecho en el apartado anterior, pero esta vez considera que las personas se pueden reinfectar cada dos meses.
+
+::: {.callout-tip appearance="simple" collapse="true"}
+## Pista - OMOP
+
+Modifica los argumentos `repeatedEvents` y `outcomeWashout` de la función `estimateIncidence`.
+:::
+
+##### d) Haz una gráfica de los resultados del apartado anterior.
+
+::: {.callout-tip appearance="simple" collapse="true"}
+## Pista - OMOP
+
+Utiliza los parámetros `facet` y `color` de la función `plotIncidence`.
+:::
+
+### Ejercicio 3
+
+##### Prevalencia
+
+Calcula la prevalencia mensual de COVID-19 usando el mismo denominador que has utilizado en el Ejercicio 1.
+
+##### a) Calcula la prevalencia mensual (calculada el primer dia de cada mes) y haz un gráfico de los resultados.
+
+::: {.callout-important appearance="simple" collapse="true"}
+## Importante!
+
+Consideraremos que las infecciones por COVID-19 son prevalentes durante el tiempo transcurrido entre las fechas de `cohort_start_date` y `cohort_end_date`.
+:::
+
+::: {.callout-tip appearance="simple" collapse="true"}
+## Pista - OMOP
+
+Utiliza la función `estimatePointPrevalence`, y recuerda especificar el argumento `interval` y `timePoint`. Para la gráfica, puedes usar la función `plotPrevalence`.
+:::
+
+### Ejercicios extras
+
+En estos ejercicios calcularemos la prevalencia acumulada de la COVID-19 a lo largo del tiempo. En la definición que hemos utilizado anteriormente, hemos considerando que la infección por COVID-19 duraba 10 días. Para calcular la prevalencia acumulada, modificaremos la definición para que la infección sea prevalente des del momento de la infección hasta el final del seguimiento. Para ello, utiliza el siguiente código:
+
+```{r}
+#Creamos una nueva cohorte COVID-19
+cdm$covid_prev <- CohortConstructor::conceptCohort(
+  cdm=cdm,
+  conceptSet = covid_list,
+  name = "covid_prev"
+)
+
+#Indicamos la duración de la cohorte (hasta el final del seguimiento)
+cdm$covid_prev<-cdm$covid_prev %>% 
+  exitAtObservationEnd()
+```
+
+Para este ejercicio puedes usar el mismo denominador que en el Ejercicio 1:
+
+```{r}
+cdm <- generateDenominatorCohortSet(cdm = cdm,
+                                    name = "denominator",
+                                    cohortDateRange=as.Date(c("2020-03-01","2021-12-01")),
+                                    daysPriorObservation = 365,
+                                    sex="Both")
+```
+
+##### a) Calcula la prevalencia acumulada de la COVID-19 y representa gráficamente los resultados.
+
+##### b) Vuelve a calcular la prevalencia, pero en este caso estratifica el análisis en función de la etnicidad de los pacientes y haz un gráfico de los resultados. Para ello, deberás añadir la variable de etnicidad (registrada en la tabla person_id) a tu denominador. Utiliza el siguiente código para añadir la variable "ethnicity" al denominador:
+
+```{r}
+cdm$denominator <- cdm$denominator %>%
+  left_join(cdm$person%>%
+              select(person_id, ethnicity_source_value)%>%
+              rename(subject_id=person_id)) %>%
+  rename(ethnicity=ethnicity_source_value)
+```
+
+::: {.callout-tip appearance="simple" collapse="true"}
+## Pista - OMOP
+
+Cuando hagas el cálculo de prevalencia con la función `estimatePointPrevalence`, tendrás que indicar que quieres estratificar por esta variable con el argumento `strata=list(ethnicity)`.
+:::
+
+##### c) Vuelve a calcular la prevalencia acumulada tal como has hecho en los dos apartados anteriores. En este caso no estratifiques por ninguna variable, pero calcula la prevalencia únicamente en aquellos pacientes que se han vacunado contra la influenza.
+
+##### Para ello, necesitaremos crear una cohorte con los pacientes que se han vacunado contra la influenza.
+
+```{r}
+# Creamos un concept set basado en el código que indica vacunación contra la influenza
+conceptSet<- list(
+  "influenza_vac"= c(40213154)) #"Influenza, split virus, trivalent, injectable PF"
+
+#Generamos nuestra cohorte utilizando CohortConstructor
+cdm$influenza <- cdm %>% #Generamos nuestra cohorte
+  conceptCohort(conceptSet = conceptSet, 
+                exit = "event_start_date", 
+                name = "influenza") 
+
+#Indicamos la duración de la cohorte (hasta fin de la observación)
+cdm$influenza <- cdm$influenza %>% 
+   exitAtObservationEnd()
+
+#Visualizamos cuánta gente hay en la cohorte
+cdm$influenza %>%
+  tally()
+```
+
+::: {.callout-tip appearance="simple" collapse="true"}
+## Pista - OMOP
+
+Usa la función `generateTargetDenominatorCohortSet` con los mismos argumentos que hemos usado al inicio de este ejercicio, pero en este caso añade el argumento `targetCohortTable`. Cómo estamos utilizando una base de datos sintética, es posible que hayan muy pocas personas elegibles, por lo que la prevalencia te puede salir muy baja.
+:::
