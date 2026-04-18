@@ -1,5 +1,17 @@
-Demo: Reviewing results in OHDSI shiny apps
-OHDSI Europe Symposium 2026 (April 18, 2026)
-Faculty members: Melissa Leung & Berta Raventós (Erasmus MC)
+# Demo: Reviewing Results in OHDSI Shiny Apps
 
-Hands-on session to exploring OHDSI Shiny Applications, including Shiny Apps for diagnostics and those with study results. In this session, participants will learn how to navigate and review Shiny Applications, and how to identify potential inconsistencies, making it especially valuable for researchers leading their own studies or collaborating on multi-database studies.  
+**Faculty Members:** Melissa Leung & Berta Raventós (Erasmus MC)  
+**Event:** OHDSI Europe Symposium 2026  
+**Date & Time:** April 18, 2026 | 15:30–17:30  
+
+## Overview
+
+This hands-on session introduces participants to exploring OHDSI Shiny Applications, including apps for diagnostics and reviewing study results.  
+
+### What You Will Learn
+
+- How to navigate OHDSI Shiny Applications  
+- How to review and interpret study results  
+- How to identify potential inconsistencies or data issues  
+
+This session is especially valuable for researchers leading their own studies or collaborating on multi-database projects, helping ensure robust and reproducible research findings.
