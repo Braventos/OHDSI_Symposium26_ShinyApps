@@ -5,3 +5,5 @@
 final/
 Example previous training/
 all/
+.DS_Store
+.gitignore
