@@ -6,7 +6,16 @@
 
 ## Overview
 
-This hands-on session introduces participants to exploring OHDSI Shiny Applications, including apps for diagnostics and reviewing study results.  
+This hands-on session introduces participants to exploring OHDSI Shiny Applications, including apps for diagnostics and reviewing study results. 
+The session will use a previous study on paracetamol prescribing and overdose ([EUPAS1000000584](https://catalogues.ema.europa.eu/node/4485/administrative-details)) as an example and is divided into two parts:
+
+
+1. **Diagnostics (Part 1):** Learn to use Shiny apps for reviewing drug records.  
+   - [Shiny App – Diagnostics](https://data.darwin-eu.org/ShinyWorkshop_DrugExpDiagnostics/)  
+
+2. **Study Results (Part 2):** Explore Shiny apps that summarise study results.  
+   - [Shiny App – Study Results](https://data.darwin-eu.org/EUPAS1000000584/)  
+ 
 
 ### What You Will Learn
 
