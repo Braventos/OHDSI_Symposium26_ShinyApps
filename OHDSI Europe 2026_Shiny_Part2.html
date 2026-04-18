@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Berta Raventós &amp; Melissa Leung">
+<meta name="author" content="Melissa Leung - Epidemiologist for real-world data studies">
 
-<title>Shiny Study results</title>
+<title>Reviewing results in OHDSI shiny apps: Study results (Part 2)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -3043,14 +3043,14 @@ vertical-align: -.125em;
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#exercice-drugexposurediagnostics" id="toc-exercice-drugexposurediagnostics" class="nav-link" data-scroll-target="#exercice-drugexposurediagnostics">Exercice: DrugExposureDiagnostics</a></li>
-  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful links</a>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#exercise-results-review" id="toc-exercise-results-review" class="nav-link" data-scroll-target="#exercise-results-review">Exercise: Results review</a>
   <ul class="collapse">
-  <li><a href="#exercice-1" id="toc-exercice-1" class="nav-link" data-scroll-target="#exercice-1">Exercice 1</a></li>
-  <li><a href="#exercice-2" id="toc-exercice-2" class="nav-link" data-scroll-target="#exercice-2">Exercice 2</a></li>
-  <li><a href="#exercice-3" id="toc-exercice-3" class="nav-link" data-scroll-target="#exercice-3">Exercice 3</a></li>
-  <li><a href="#exercice-4" id="toc-exercice-4" class="nav-link" data-scroll-target="#exercice-4">Exercice 4</a></li>
-  <li><a href="#exercice-5" id="toc-exercice-5" class="nav-link" data-scroll-target="#exercice-5">Exercice 5</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
+  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
+  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -3060,7 +3060,7 @@ vertical-align: -.125em;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Shiny Study results</h1>
+<h1 class="title">Reviewing results in OHDSI shiny apps: Study results (Part 2)</h1>
 </div>
 
 
@@ -3069,7 +3069,7 @@ vertical-align: -.125em;
   <div class="quarto-title-meta-heading">Affiliation</div>
   
     <div class="quarto-title-meta-contents">
-    <p class="author">Berta Raventós &amp; Melissa Leung </p>
+    <p class="author">Melissa Leung - Epidemiologist for real-world data studies </p>
   </div>
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
@@ -3092,228 +3092,91 @@ vertical-align: -.125em;
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In this part of the tutorial, we will explore Shiny Apps to see how we can review study results. The results that we will see are from two studies on paracetamol prescribing and paracetamol overdose in Europe (1,2). Both were cohort studies aimed to estimated the yearly incidence rates of paracetamol prescribing and overdose, as well as the period prevalence of paracetamol prescribing. Moreover, characteristics of individuals with paracetamol overdose were described.</p>
+<p>In this part of the tutorial, we will explore Shiny Apps to see how we can review study results. The results that we will see are from two studies on paracetamol prescribing and paracetamol overdose in Europe (1,2). Both were cohort studies aimed to estimate the yearly incidence rates of paracetamol prescribing and overdose, as well as the period prevalence of paracetamol prescribing. Moreover, characteristics of individuals with paracetamol overdose were described.</p>
+<p><strong>Link to the ShinyApp</strong>: <a href="https://data.darwin-eu.org/EUPAS1000000584/">Study results</a></p>
 </section>
-<section id="exercice-drugexposurediagnostics" class="level2">
-<h2 class="anchored" data-anchor-id="exercice-drugexposurediagnostics">Exercice: DrugExposureDiagnostics</h2>
-<p>For this exercise, we will review a ShinyApp with DrugExposureDiagnostics (3) results for hypothetical data sources participating in the study. You will explore the Shiny app in groups of four. Approach the results from a reviewer’s perspective and try to identify aspects that might be critical for the study.</p>
-<p>Most sections of the Shiny app allow you to filter results (e.g., by data source) and generate plots. Be sure to use these features to help you review the results effectively.</p>
-</section>
-<section id="useful-links" class="level2">
-<h2 class="anchored" data-anchor-id="useful-links">Useful links</h2>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p><strong>The basics: attrition and demographics</strong></p>
+<p>We start by assessing the attrition of study participants. We can find ‘Attrition’ under the tab ‘Cohorts’. We can select one or multiple of the databases, study cohorts, and lengths of minimum duration of prior observation. We can view the attrition in table or in a diagram.</p>
+<p>When reviewing attrition results, we typically ask these questions:</p>
 <ul>
-<li>DrugExposureDiagnostics: <to add></to></li>
+<li><p>In which step does the largest drop in the number of individuals occur?</p></li>
+<li><p>Are there steps in which no exclusions occur, although they are expected?</p></li>
 </ul>
-<section id="exercice-1" class="level3">
-<h3 class="anchored" data-anchor-id="exercice-1">Exercice 1</h3>
-<p>1.1. Begin by reviewing the “Ingredient Concepts” section.The drop_down menu “Variable” allows to explore plots stratified by drug, concept_class, and dose_form. Which is the drug (concept) with most counts across data sources?</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Database 1 &amp; 6: Acetaminophen 500 MG; Database 2: Acetaminophen 125MG; Database 3: Acetaminophen; Database 7: Acetaminophen 1000 MG Oral Tablet; Database 8: Acetaminophen/Tramadol Tablet for Oral Suspension.</p>
-</div>
-</div>
-</div>
-<p>1.2. For the study, we will need to stratify results by dose form. Are oral formulations the most common across the data sources? Examine the plots and record any insights or findings that catch your attention.</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>In general, oral forms predominate across data sources (e.g., tablets, capsules, suspensions). In Database 2, rectal suppositories are the most common. In Database 5, the “unknown” category predominates, followed by injections. Injections also rank second in Database 1.</p>
-</div>
-</div>
-</div>
+<p>Next, we will look at the demographics. Again, we can select on or multiple of the databases and study cohorts. We can also select one or multiple of the study periods.</p>
+<p>When reviewing the demographics, we typically ask these questions:</p>
+<ul>
+<li><p>What is the median [interquartile range] age and the age distribution? Is this similar between the databases? Is this expected based on our prior knowledge?</p></li>
+<li><p>What is the gender distribution? Is this similar between the databases? Is this expected based on our prior knowledge?</p></li>
+</ul>
+<p><strong>Study-specific results</strong></p>
+<p>Now, we will look at the study-specific results.</p>
+<p><strong><em>Paracetamol prescribing: incidence and prevalence; incidence of paracetamol overdose</em></strong></p>
+<p>As we have seen before, we can select one or multiple of the databases and study periods. However, we now have selection buttons to delve into specific results:</p>
+<ul>
+<li><p>Formulation</p></li>
+<li><p>Age group</p></li>
+<li><p>Sex</p></li>
+<li><p>One or multiple of the calendar years in the study period</p></li>
+</ul>
+<p>We can view the results in a table or in a graph. When we view the results in a graph, we can adjust the settings such that we can view the results from all databases in one plot to compare the results between databases. Similarly, we can compare results between age groups and between females and males.</p>
+<p>When reviewing incidence results, we typically ask these questions:</p>
+<ul>
+<li><p>What is the trend of the incidence over calendar time? Is this similar between databases? Is this expected based on our prior knowledge?</p></li>
+<li><p>How do trends compare between strata? Is this similar between databases? Is this expected based on our prior knowledge?</p></li>
+</ul>
+<p><strong><em>Characteristics of individuals with paracetamol overdose: pre-specified comorbidities, pre-specified medications, and large-scale characteristics</em></strong></p>
+<p>We can again select one or multiple of the databases and strata. Additionally, we can select one or multiple of the time windows of interest, and one or multiple of the pre-specified variables.</p>
+<p>In the large-scale characterisation, the tab ‘Most frequent codes’ is helpful to see the most frequent condition codes and medication codes per database cohort.</p>
+<p>When reviewing characterisation results, we typically ask these questions:</p>
+<ul>
+<li><p>Which comorbidities and medications are the most common? Is this similar between databases? Is this expected based on our prior knowledge?</p></li>
+<li><p>Are the patterns of comorbidities and medications consistent with each other? Is this similar between databases? Is this expected based on our prior knowledge?</p></li>
+</ul>
 </section>
-<section id="exercice-2" class="level3">
-<h3 class="anchored" data-anchor-id="exercice-2">Exercice 2</h3>
-<p>2.1. Review the “Drug routes” section and explore the routes captured in the data. Do these align with those observed by dose form?</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>In most cases, yes, as the oral route predominates across the data sources. However, Databases 2 and 7 contain no information on the route, and in Database 5, many records do not have a matching concept.</p>
-</div>
-</div>
-</div>
-<p>2.2. Review “Drug variables missing”. What is the percentatge of missings in Database 5? Filter results by database and value (“n_missing_route_concept_id”)</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>From the sample analysed, the percentage of missings is approximately 42% in Database 5.</p>
-</div>
-</div>
-</div>
-<p>2.3. In this database, which concept (drug_concept_id; drug) has more records with missing values? To do so, use the same filters as the previous question and click on “by concept_id”.</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Most records with missing data correspond to the ingredient-level code (1125315, acetaminophen), which provides no information beyond the ingredient name.</p>
-</div>
-</div>
-</div>
+<section id="exercise-results-review" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-results-review">Exercise: Results review</h2>
+<p>For this exercise, we will review a ShinyApp with study results: <a href="https://data.darwin-eu.org/EUPAS1000000584/" class="uri">https://data.darwin-eu.org/EUPAS1000000584/</a>. You will explore the other Shiny app in groups of four. Approach the results from a reviewer’s perspective and think about the interpretation of the results.</p>
+<section id="exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
+<p>1.1. Begin by reviewing the attrition. How many individuals were included in objective 1 from each database?</p>
+<p>1.2. How many individuals were included in objective 2 from each database?</p>
 </section>
-<section id="exercice-3" class="level3">
-<h3 class="anchored" data-anchor-id="exercice-3">Exercice 3</h3>
-<p>3.1. Review the “Drug types” section. What kinds of records are present in the data sources? Is there anything unusual or noteworthy? How would you handle it?</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Most records are EHR, EHR prescription/dispensing, or registry. In Database 5, some records are labeled as NLP. It would be recommended to discuss with the data partner how these records were generated.</p>
-</div>
-</div>
-</div>
+<section id="exercise-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
+<p>2.1. Review the demographics of individuals who received their first-ever prescription of paracetamol during the study period. What was the range of the number of individuals included in the demographics cohort across the databases?</p>
+<p>2.2. What was the sex distribution across the databases?</p>
+<p>2.3. What was the range of median age across the databases?</p>
+<p>2.4. What was the median duration of the first paracetamol prescription?</p>
 </section>
-<section id="exercice-4" class="level3">
-<h3 class="anchored" data-anchor-id="exercice-4">Exercice 4</h3>
-<p>4.1. Review the “Drug Source Concepts” section. Is it possible to examine source concepts in all databases? If not, which databases do not allow this?</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Database 1, 5, and 7 have no drug_source_concept_id. In database 1, 2, and 7, some drug_source_values are available (verbatim value from the source data).</p>
-</div>
-</div>
-</div>
-<p>4.2. In Databases 7 and 8, it is possible to review drug_source_values, as they use ATC codes as source values. Examine the source concepts for these two data sources. Do you notice any inconsistencies or mismatches between the source values and the mapped concepts?</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>For database 8, we see source values for drugs that are not related to paracetamol, such as diclofenac, ibuprofen, ketoprofen, etc.</p>
-</div>
-</div>
-</div>
+<section id="exercise-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3">Exercise 3</h3>
+<p>3.1. Review the incidence of paracetamol prescribing. What was the trend over the study in the incidence rate of paracetamol prescribing in each of the data sources?</p>
+<p>3.2. How did the incidence rates compare between females and males in each data source?</p>
+<p>3.3. How did the incidence rates compare between age groups in each data source?</p>
+<p>3.4 What was the most frequently prescribed formulation of paracetamol in each data source?</p>
+<p>3.5. How did the incidence rates of different formulations of paracetamol compare between females and males in each database?</p>
 </section>
-<section id="exercice-5" class="level3">
-<h3 class="anchored" data-anchor-id="exercice-5">Exercice 5</h3>
-<p>5.1.Examine the “Drug exposure duration” section, focusing on the minimum, median, and percentile values. Is there anything that catches your attention?</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Median and percentile values are the same in Database 2 and 8.</p>
-</div>
-</div>
-</div>
-<p>5.2. How would you explain the results for Data Sources 2 and 8? What would you do in this case?</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The fact that all values are identical suggests that the databases might lack actual duration information, possibly defaulting to 30 days for all records. If we are conducting a multi-database study, confirming this with the data partner would be recommended.</p>
-</div>
-</div>
-</div>
-<p>5.3. The results for Data Sources 1 and 5 make sense given the healthcare settings covered by these sources. What kind of data do you think they contain?</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Median duration is 1 and 3 days, which could be reasonable if these data sources have data from inpatient data only.</p>
-</div>
-</div>
-</div>
-<p>5.4. In this study, we aim to calculate prevalence of paracetamol prescribing. How the recording of duration can impact our results?</p>
+<section id="exercise-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4">Exercise 4</h3>
+<p>4.1. Review the characterisation of individuals with paracetamol overdose. What were the three most frequent pre-specified conditions anytime prior to paracetamol overdose?</p>
+<p>4.2. What was the most recorded medication at ingredient level during the month prior to the diagnosis of paracetamol overdose in each database in the large-scale characterisation?</p>
+</section>
+<section id="exercise-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5">Exercise 5</h3>
+<p>Now that we have seen some main results, we will take a step back to look at the bigger picture: are the results similar between databases? Do we understand the cause of differences in results between databases? Which country-specific and healthcare setting-specific factors should we consider in the interpretation of the results?</p>
+<p>5.1. In one of the databases, the median duration of paracetamol prescriptions was identical to the duration at the 25th and 75th percentiles. Which database is it and what was the median [interquartile range] duration of paracetamol prescriptions?</p>
+<p>5.2. Oral liquid formulations and rectal suppositories were predominantly seen in children aged 1 to 5 and 6 to 11 years. Can you think of ways in which this aligns with clinical practice?</p>
+<p>5.3. Two databases with hospital data are APHM and H12O. Do you this reflected in the results of the incidence rates and prevalence of paracetamol prescribing?</p>
+<p>5.4. Can you think of a reason why we might have underestimated the incidence and prevalence of paracetamol use in this study?</p>
 </section>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <ol type="1">
 <li>DARWIN EU® – Paracetamol prescribing and paracetamol overdose in Europe: a descriptive analysis of trends and patient characteristics (EUPAS1000000329), https://catalogues.ema.europa.eu/node/4230/administrative-details</li>
-<li>DARWIN EU® – Paracetamol prescribing and paracetamol overdose in Europe: a descriptive analysis of trends and patient characteristics (EUPAS1000000584), https://catalogues.ema.europa.eu/node/4485/administrative-details</li>
-<li>Inberg G, Burn E, Burkard T (2026). DrugExposureDiagnostics: Diagnostics for OMOP Common Data Model Drug Records. R package version 1.1.6, https://darwin-eu.github.io/DrugExposureDiagnostics/.</li>
+<li>DARWIN EU® – Paracetamol prescribing and paracetamol overdose in Europe: a descriptive analysis of trends and patient characteristics (EUPAS1000000584), https://catalogues.ema.europa.eu/node/4485/administrative-details :::</li>
 </ol>
 </section>
 
